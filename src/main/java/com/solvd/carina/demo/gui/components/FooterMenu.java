@@ -14,6 +14,8 @@ public class FooterMenu extends AbstractUIObject {
     @FindBy(linkText = "Home")
     private ExtendedWebElement homeLink;
 
+    @FindBy(xpath = "//div[@id='footer']//a[contains(text(), '%s')]")
+    private ExtendedWebElement footerMenuButton;
     @FindBy(xpath = "//div[@class='footer-inner']//a[contains(text(),'Compare')]")
     private ExtendedWebElement compareLink;
     
@@ -37,5 +39,12 @@ public class FooterMenu extends AbstractUIObject {
     public NewsPage openNewsPage() {
         newsLink.click();
         return new NewsPage(driver);
+    }
+    public boolean openPage(FooterButton footerButton) {
+        footerMenuButton.format(footerButton.getValue()).click();
+        return true;
+    }
+    public void clickFooterMenuButton(FooterButton footerButton) {
+        homeLink.format(footerButton.getValue()).click();
     }
 }

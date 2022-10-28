@@ -8,7 +8,7 @@ import com.qaprosoft.carina.core.foundation.utils.R;
 import com.solvd.carina.demo.gui.components.HeaderMenu;
 
 import com.solvd.carina.demo.gui.components.FooterMenu;
-import com.solvd.carina.demo.gui.components.LoginForm;
+import com.solvd.carina.demo.gui.components.LoginMenu;
 import com.solvd.carina.demo.gui.components.WeValuePrivacyAd;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -17,8 +17,6 @@ import org.slf4j.LoggerFactory;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
-import com.solvd.carina.demo.gui.components.FooterMenu;
-
 
 
 public class HomePage extends AbstractPage {
@@ -36,10 +34,13 @@ public class HomePage extends AbstractPage {
     private ExtendedWebElement newsColumn;
 
     @FindBy(id = "login-popup2")
-    private LoginForm loginForm;
+    private LoginMenu loginMenu;
 
     @FindBy(xpath = "//button[contains(@class, 'lines-button minus')]")
-    private ExtendedWebElement hamburgerMenuButton;
+    private ExtendedWebElement menuHumburgerButton;
+
+    @FindBy(xpath = "//div[@id='footer']//a[contains(text(), '%s')]")
+    private ExtendedWebElement footerMenuButton;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -55,14 +56,16 @@ public class HomePage extends AbstractPage {
         return headerMenu;
     }
 
-    public LoginForm getLoginForm() {
-        return loginForm;
+    public LoginMenu getLoginForm() {
+        return loginMenu;
     }
 
-    public void clickHamburgerMenu() {
-        hamburgerMenuButton.click();
+    public void clickMenuHumburgerButton() {
+        menuHumburgerButton.click();
     }
-
+    public void clickFooterMenuButton() {
+        footerMenuButton.click();
+    }
     public BrandModelsPage selectBrand(String brand) {
         LOGGER.info("selecting '" + brand + "' brand...");
         for (ExtendedWebElement brandLink : brandLinks) {

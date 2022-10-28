@@ -1,9 +1,10 @@
 package com.solvd.carina.demo.gui.components;
 
+import com.azure.core.http.rest.Page;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
+import com.qaprosoft.carina.core.gui.AbstractPage;
 import com.qaprosoft.carina.core.gui.AbstractUIObject;
-import com.solvd.carina.demo.gui.components.HeaderButtonLink;
-import com.solvd.carina.demo.gui.components.HeaderIconLink;
+import com.solvd.carina.demo.gui.pages.HomePage;
 import com.solvd.carina.demo.gui.pages.SignUpPage;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
@@ -14,24 +15,40 @@ public class HeaderMenu extends AbstractUIObject {
     @FindBy(xpath = "//li/a[text() = '%s']")
     private ExtendedWebElement headerMenuButton;
 
+    @FindBy(xpath = "//a[contains(@class, 'signup-icon')]")
+    private ExtendedWebElement signUpButton;
+
+    @FindBy(id = "login-active")
+    private ExtendedWebElement loginButton;
+
+    @FindBy(id = "login-popup2")
+    private LoginMenu loginMenu;
+
     @FindBy(xpath = "//*[@id='social-connect']/a[@class = \"%s\"]")
     private ExtendedWebElement headerIcon;
+
+    @FindBy(xpath = "//ul[@id='menu']//a[contains(text(), '%s')]")
+    private ExtendedWebElement menuHumburgerButton;
     public  HeaderMenu(WebDriver driver, SearchContext searchContext) {super(driver,searchContext);}
 
-    public void clickHeaderMenuButton(HeaderButtonLink headerButtonLink) {
-        headerMenuButton.format(headerButtonLink.getValue()).click();
+    public void clickHeaderMenuButton(HeaderButton headerButton) {
+        headerMenuButton.format(headerButton.getValue()).click();
     }
 
-    public boolean isHeaderMenuButtonPresent(HeaderButtonLink headerButtonLink) {
-        return headerMenuButton.format(headerButtonLink.getValue()).isElementPresent();
+    public boolean isHeaderMenuButtonPresent(HeaderButton headerButton) {
+        return headerMenuButton.format(headerButton.getValue()).isElementPresent();
+    }
+    public boolean openPage(HeaderButton headerButton) {
+        menuHumburgerButton.format(headerButton.getValue()).click();
+        return true;
+    }
+    public SignUpPage openSignUpPage() {
+        signUpButton.click();
+        return new SignUpPage(driver);
     }
 
-    public void clickHeaderMenuIcon(HeaderIconLink headerIconLink) {
-        headerIcon.format(headerIconLink.getValue()).click();
-    }
-
-    public SignUpPage goToSignUpPage() {
-        clickHeaderMenuIcon(HeaderIconLink.SIGN_UP);
-        return new SignUpPage(getDriver());
+    public LoginMenu openLoginMenu() {
+        loginButton.click();
+        return loginMenu;
     }
 }

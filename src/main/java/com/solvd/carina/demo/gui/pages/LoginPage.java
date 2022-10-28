@@ -15,7 +15,7 @@ public class LoginPage extends AbstractPage {
         setPageURL("/login.php3");
     }
 
-    public boolean isLoggedIn(){
-        return  LoginSuccessfulTitle.isElementPresent();
+    public boolean isLogin(){
+        return  LoginSuccessfulTitle.isPresent();
     }
 }

@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 public class SignUpPage extends AbstractPage {
 
 
-//    @FindBy(id = "uname")
+
     @FindBy(xpath = "//input[@id='uname']")
     private ExtendedWebElement nicknameTextBox;
 
@@ -18,8 +18,11 @@ public class SignUpPage extends AbstractPage {
     @FindBy(xpath = "//*[@id = 'frmOpin']/input[@id = \"upass\"]")
     private ExtendedWebElement passwordTextBox;
 
-    @FindBy(xpath = "//label[@for = \"%s\"]")
-    private ExtendedWebElement swiper;
+    @FindBy(xpath = "//label[@for='iagree1']")
+    private ExtendedWebElement agreeTerms;
+
+    @FindBy(xpath = "//label[@for='iagree2']")
+    private ExtendedWebElement confirmTerms;
 
     @FindBy(xpath = "//div[@id= \"ucsubmit-f\"]/input[@id= \"nick-submit\"]")
     private ExtendedWebElement submitButton;
@@ -31,32 +34,29 @@ public class SignUpPage extends AbstractPage {
         setPageURL("/register.php3");
     }
 
-    public void writeToNicknameTextBox(String s) {
-        nicknameTextBox.type(s);
+    public void fillToNicknameTextBox(String text) {
+        nicknameTextBox.type(text);
     }
 
-    public void writeToEmailTextBox(String s) {
-        emailTextBox.type(s);
+    public void fillToEmailTextBox(String text) {
+        emailTextBox.type(text);
     }
 
-    public void writeToPasswordTextBox(String s) {
-        passwordTextBox.type(s);
+    public void fillToPasswordTextBox(String text) {
+        passwordTextBox.type(text);
     }
 
-    public void confirmEverything() {
-        swiper.format("iagree1").click();
-        swiper.format("iagree2").click();
+    public void confirmTerms() {
+        agreeTerms.click();
+        confirmTerms.click();
     }
 
     public void clickSubmitButton() {
         submitButton.click();
     }
 
-    public boolean isRegistered() {
-        return accountWasCreatedTitle.isElementPresent();
-    }
 
-    public String getRegistrationResult(){
+    public String getResult(){
         return accountWasCreatedTitle.getText();
     }
 

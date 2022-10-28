@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.FindBy;
 
-public class LoginForm extends AbstractUIObject {
+public class LoginMenu extends AbstractUIObject {
 
     @FindBy (xpath = "//*[@id = \"login-popup2\"]/form/input[@id = \"email\"]")
     private ExtendedWebElement loginTextBox;
@@ -23,16 +23,16 @@ public class LoginForm extends AbstractUIObject {
     private ExtendedWebElement loginText;
 
     @FindBy (xpath = "//*[@id = \"login-popup2\"]/a[@class = \"forgot\"]")
-    private ExtendedWebElement forgotPasswordButton;
+    private ExtendedWebElement isForgotPasswordButton;
 
-    public  LoginForm(WebDriver driver, SearchContext searchContext) {super(driver, searchContext);}
+    public LoginMenu(WebDriver driver, SearchContext searchContext) {super(driver, searchContext);}
 
-    public void writeToLoginTextBox(String s) {
-        loginTextBox.type(s);
+    public void fillToLoginTextBox(String text) {
+        loginTextBox.type(text);
     }
 
-    public void writeToPasswordTextBox(String s) {
-        passwordTextBox.type(s);
+    public void fillToPasswordTextBox(String text) {
+        passwordTextBox.type(text);
     }
 
     public LoginPage LoginButtonClick() {
@@ -40,54 +40,44 @@ public class LoginForm extends AbstractUIObject {
         return new LoginPage(getDriver());
     }
 
-    public boolean isLoginTextPresented() {
-        return loginText.isElementPresent();
+    public boolean isLoginTextPresent() {
+        return loginText.isPresent();
     }
 
-    public boolean isLoginTextBoxPresented() {
-        return loginTextBox.isElementPresent();
+    public boolean isLoginTextBoxPresent() {
+        return loginTextBox.isPresent();
     }
 
     public boolean isLoginButtonPresent() {
-        return loginButton.isElementPresent();
+        return loginButton.isPresent();
     }
 
-    public boolean isForgotPasswordButtonPresent() {return forgotPasswordButton.isElementPresent();}
+    public boolean isForgotPasswordButtonPresent() {return isForgotPasswordButton.isPresent();}
 
     public void hoverLoginButton() {
         loginButton.hover();
     }
-    public Color getLoginButtonColor() {
-        return Color.fromString(loginButton.getElement().getCssValue("background-color"));
+    public String getLoginButtonColor() {
+        return loginButton.getElement().getCssValue("background-color");
     }
 
-    public boolean isPasswordTextBoxPresented() {
-        return passwordTextBox.isElementPresent();
+    public boolean isPasswordTextBoxPresent() {
+        return passwordTextBox.isPresent();
     }
 
-    public boolean isLoginTextBoxTypeAble() {
-        try {
-            loginTextBox.type("text");
-        }
-        catch (Exception e)
-        {
-            return false;
-        }
+    public boolean isLoginTextBoxReadyToEnterValues() {
+
+        loginTextBox.type("Something");
         return  true;
     }
 
-    public boolean isPasswordTextBoxTypeAble() {
-        try {
-            passwordTextBox.type("text");
-        }
-        catch (Exception e)
-        {
-            return false;
-        }
+    public boolean isPasswordTextBoxReadyToEnterValues() {
+
+        passwordTextBox.type("Something");
         return  true;
     }
 
     public boolean isForgotPasswordButtonClickable() {
-        return forgotPasswordButton.isClickable();
+        return isForgotPasswordButton.isClickable();
     }
 }
