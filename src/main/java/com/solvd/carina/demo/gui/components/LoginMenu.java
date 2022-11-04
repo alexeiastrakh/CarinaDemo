@@ -16,6 +16,8 @@ public class LoginMenu extends AbstractUIObject {
     @FindBy (xpath = "//*[@id = \"login-popup2\"]/form/input[@id = \"upass\"]")
     private ExtendedWebElement passwordTextBox;
 
+    @FindBy(xpath = "//span[@id='login-popup2']//input[@id='email']")
+    private ExtendedWebElement emailTextBox;
     @FindBy (xpath = "//*[@id = \"login-popup2\"]/form/input[@id = \"nick-submit\"]")
     private ExtendedWebElement loginButton;
 
@@ -79,5 +81,12 @@ public class LoginMenu extends AbstractUIObject {
 
     public boolean isForgotPasswordButtonClickable() {
         return isForgotPasswordButton.isClickable();
+    }
+    public String getEmailErrorMessage() {
+        return emailTextBox.getAttribute("validationMessage");
+    }
+
+    public String getPasswordErrorMessage() {
+        return passwordTextBox.getAttribute("validationMessage");
     }
 }

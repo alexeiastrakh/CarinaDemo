@@ -10,6 +10,7 @@ import com.solvd.carina.demo.gui.components.HeaderMenu;
 import com.solvd.carina.demo.gui.components.FooterMenu;
 import com.solvd.carina.demo.gui.components.LoginMenu;
 import com.solvd.carina.demo.gui.components.WeValuePrivacyAd;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
@@ -56,7 +57,7 @@ public class HomePage extends AbstractPage {
         return headerMenu;
     }
 
-    public LoginMenu getLoginForm() {
+    public LoginMenu getLoginMenu() {
         return loginMenu;
     }
 
@@ -78,7 +79,15 @@ public class HomePage extends AbstractPage {
         }
         throw new RuntimeException("Unable to open brand: " + brand);
     }
+    public void scrollToFooterMenu(){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        String script = "window.scrollBy(0, document.body.scrollHeight)";
 
+        for(int i = 0; i < 10; i++){
+            js.executeScript(script);
+            pause(0.2);
+        }
+        }
     public WeValuePrivacyAd getWeValuePrivacyAd() {
         return new WeValuePrivacyAd(driver);
     }

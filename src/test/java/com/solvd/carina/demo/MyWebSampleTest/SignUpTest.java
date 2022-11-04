@@ -14,8 +14,8 @@ public class SignUpTest implements IAbstractTest {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
         SignUpPage signUpPage = homePage.getHeaderMenu().openSignUpPage();
-        signUpPage.fillToNicknameTextBox("Test2345678");
-        signUpPage.fillToEmailTextBox("test2345@gmail.com");
+        signUpPage.fillToNicknameTextBox("Test234678");
+        signUpPage.fillToEmailTextBox("test235@gmail.com");
         signUpPage.fillToPasswordTextBox("12345Qwerty!");
         signUpPage.confirmTerms();
         signUpPage.clickSubmitButton();

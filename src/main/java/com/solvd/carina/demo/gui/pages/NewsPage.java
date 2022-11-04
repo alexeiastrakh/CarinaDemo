@@ -1,34 +1,14 @@
 package com.solvd.carina.demo.gui.pages;
 
-import java.util.List;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.FindBy;
-
-import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
-import com.solvd.carina.demo.gui.components.NewsItem;
+import org.openqa.selenium.WebDriver;
 
 public class NewsPage extends AbstractPage {
-    
-    @FindBy(className="searchFor")
-    private ExtendedWebElement searchTextField;
-    
-    @FindBy(xpath="//input[@value='Search']")
-    private ExtendedWebElement searchButton;
-    
-    @FindBy(xpath="//div[@class='news-item']")
-    private List<NewsItem> news;
-    
+    private final String newsPageUrl = "https://www.gsmarena.com/news.php3";
+
     public NewsPage(WebDriver driver) {
         super(driver);
-        setPageURL("/news.php3");
+        setPageAbsoluteURL(newsPageUrl);
     }
-    
-    public List<NewsItem> searchNews(String q) {
-        searchTextField.type(q);
-        searchButton.click();
-        return news;
-    }
-    
+
 }

@@ -1,14 +1,14 @@
 package com.solvd.carina.demo.gui.components;
 
+
+import com.solvd.carina.demo.gui.pages.*;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractUIObject;
-import com.solvd.carina.demo.gui.pages.CompareModelsPage;
-import com.solvd.carina.demo.gui.pages.HomePage;
-import com.solvd.carina.demo.gui.pages.NewsPage;
+
 
 public class FooterMenu extends AbstractUIObject {
     @FindBy(linkText = "Home")
@@ -26,7 +26,7 @@ public class FooterMenu extends AbstractUIObject {
         super(driver, searchContext);
     }
 
-    public HomePage openHomePage() {
+    public HomePage openHomePages() {
         homeLink.click();
         return new HomePage(driver);
     }
@@ -35,16 +35,43 @@ public class FooterMenu extends AbstractUIObject {
         compareLink.click();
         return new CompareModelsPage(driver);
     }
-    
-    public NewsPage openNewsPage() {
-        newsLink.click();
-        return new NewsPage(driver);
+    public ExtendedWebElement getFooterMenuButton(){
+        return footerMenuButton;
     }
+
     public boolean openPage(FooterButton footerButton) {
         footerMenuButton.format(footerButton.getValue()).click();
         return true;
     }
     public void clickFooterMenuButton(FooterButton footerButton) {
-        homeLink.format(footerButton.getValue()).click();
+        footerMenuButton.format(footerButton.getValue()).click();
+    }
+    public HomePage openHomePage() {
+        footerMenuButton.format(FooterButton.HOME.getValue()).click();
+        return new HomePage(driver);
+    }
+
+    public NewsPage openNewsPage() {
+        footerMenuButton.format(FooterButton.NEWS.getValue()).click();
+        return new NewsPage(driver);
+    }
+
+    public ReviewsPage openReviewsPage() {
+        footerMenuButton.format(FooterButton.REVIEWS.getValue()).click();
+        return new ReviewsPage(driver);
+    }
+    public CoveragePage openCoveragePage() {
+        footerMenuButton.format(FooterButton.Coverage.getValue()).click();
+        return new CoveragePage(driver);
+    }
+
+    public GlossaryPage openGlossaryPage() {
+        footerMenuButton.format(FooterButton.Glossary.getValue()).click();
+        return new GlossaryPage(driver);
+    }
+
+    public FAQPage openFAQPage() {
+        footerMenuButton.format(FooterButton.FAQ.getValue()).click();
+        return new FAQPage(driver);
     }
 }
